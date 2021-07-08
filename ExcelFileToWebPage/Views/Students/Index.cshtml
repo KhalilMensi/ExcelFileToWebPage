@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Student>
+@{
+    Layout = "_Layout";
+}
+<div class="row justify-content-center align-content-center">
+    <form asp-action="Index" class="mt-2 mb-2" asp-route-FileName="@ViewBag.FileName" asp-controller="Students" method="post" enctype="multipart/form-data">
+        <div class="custom-file col-md-3">
+            <input type="file" class="custom-file-input" id="File" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+            <label class="custom-file-label" for="File">@ViewBag.FileName</label>
+        </div>
+        <button class="btn btn-primary col-md-2" type="submit">Upload</button>
+    </form>
+
+    <table id="Students" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Tel</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                foreach (Student student in Model)
+                {
+                    <tr>
+                        <td>@student.Name</td>
+                        <td>@student.Email</td>
+                        <td>@student.Tel</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts{
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+
+    <script src="~/assets/Students.js" asp-append-version="true"></script>
+}
+
